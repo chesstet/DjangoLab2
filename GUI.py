@@ -44,19 +44,19 @@ def run():
     id_box = Entry(root, width=30)
     id_box.grid(row=9, column=1, pady=5)
 
-    name_label = Label(root, text="name")
+    name_label = Label(root, text="Ім'я")
     name_label.grid(row=0, column=0, pady=(10, 0))
-    grade_label = Label(root, text="grade")
+    grade_label = Label(root, text="Оцінка")
     grade_label.grid(row=1, column=0)
-    speciality_label = Label(root, text="speciality")
+    speciality_label = Label(root, text="Спеціальність")
     speciality_label.grid(row=2, column=0)
-    course_label = Label(root, text="course")
+    course_label = Label(root, text="Курс")
     course_label.grid(row=3, column=0)
-    cohort_label = Label(root, text="cohort")
+    cohort_label = Label(root, text="Група")
     cohort_label.grid(row=4, column=0)
-    discipline_label = Label(root, text="discipline")
+    discipline_label = Label(root, text="Дисципліна")
     discipline_label.grid(row=5, column=0)
-    id_box_label = Label(root, text="Select ID")
+    id_box_label = Label(root, text="Вибір ID")
     id_box_label.grid(row=9, column=0, pady=5)
 
     def create_button():
@@ -77,22 +77,22 @@ def run():
     def exportToSQLite():
         pass
 
-    submit_btn = Button(root, text="Add Record To Database", command=create_button)
-    submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+    submit_btn = Button(root, text="Додати запис до бази даних", command=create_button)
+    submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=90)
 
-    query_btn = Button(root, text="Show Records", command=read_button)
-    query_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
+    query_btn = Button(root, text="Показати записи", command=read_button)
+    query_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=120)
 
-    delete_btn = Button(root, text="Delete Record", command=delete_button)
-    delete_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=136)
+    delete_btn = Button(root, text="Видалити запис", command=delete_button)
+    delete_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=125)
 
-    edit_btn = Button(root, text="Edit Record", command=update_button)
-    edit_btn.grid(row=11, column=0, columnspan=2, pady=10, padx=10, ipadx=143)
+    edit_btn = Button(root, text="Відредагувати запис", command=update_button)
+    edit_btn.grid(row=11, column=0, columnspan=2, pady=10, padx=10, ipadx=113)
 
-    exportMySql_btn = Button(root, text="Export to MySQL", command=exportToMySQL)
-    exportMySql_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=136)
+    exportMySql_btn = Button(root, text="Експорт до MySQL", command=exportToMySQL)
+    exportMySql_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=117)
 
-    exportSQLite_btn = Button(root, text="Export to SQLite", command=exportToSQLite)
-    exportSQLite_btn.grid(row=13, column=0, columnspan=2, pady=10, padx=10, ipadx=136)
+    exportSQLite_btn = Button(root, text="Експорт до SQLite", command=exportToSQLite)
+    exportSQLite_btn.grid(row=13, column=0, columnspan=2, pady=10, padx=10, ipadx=119)
 
     root.mainloop()
