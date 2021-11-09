@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox as mb
 import tkinter as tk
 import tkinter.ttk as ttk
 
@@ -60,16 +61,124 @@ def run():
     id_box_label.grid(row=9, column=0, pady=5)
 
     def create_button():
-        pass
+        db_name = name.get()
+        db_grade = grade.get()
+        db_speciality = speciality.get()
+        db_course = course.get()
+        db_cohort = cohort.get()
+        db_discipline = discipline.get()
+
+        if db_grade != '':
+            db_grade = int(db_grade)
+        if db_speciality != '':
+            db_speciality = int(db_speciality)
+        if db_course != '':
+            db_course = int(db_course)
+
+        data_arr = [db_name, db_grade, db_speciality, db_course, db_cohort, db_discipline]
+        print(data_arr)
+        # TODO: create functionality
 
     def read_button():
-        pass
+        db_name = name.get()
+        db_grade = grade.get()
+        db_speciality = speciality.get()
+        db_course = course.get()
+        db_cohort = cohort.get()
+        db_discipline = discipline.get()
 
-    def delete_button():
-        pass
+        if db_grade != '':
+            db_grade = int(db_grade)
+        if db_speciality != '':
+            db_speciality = int(db_speciality)
+        if db_course != '':
+            db_course = int(db_course)
+
+        data_arr = [db_name, db_grade, db_speciality, db_course, db_cohort, db_discipline]
+        # TODO: read functionality
+
+        global reader
+        reader = Tk()
+        table = Table(reader, headings=('id', 'name', 'grade', 'speciality', 'course', 'cohort', 'discipline'),
+                      rows=fetched_all)
+        table.pack(expand=tk.YES, fill=tk.BOTH)
 
     def update_button():
-        pass
+        def button_pusher():
+            db_name = name_editor.get()
+            db_grade = grade_editor.get()
+            db_speciality = speciality_editor.get()
+            db_course = course_editor.get()
+            db_cohort = cohort_editor.get()
+            db_discipline = discipline_editor.get()
+
+            data_arr = [db_name, db_grade, db_speciality, db_course, db_cohort, db_discipline]
+
+            # TODO: update functionality
+
+            editor.destroy()
+            root.deiconify()
+
+        root.withdraw()
+
+        global editor
+        try:
+            editor = Tk()
+            editor.title('Update A Record')
+            editor.geometry("400x300")
+
+            record_id = int(id_box.get())
+            # TODO: read functionality
+            records = fetched
+
+            name_editor = Entry(editor, width=30)
+            name_editor.grid(row=0, column=1, padx=20, pady=(10, 0))
+            grade_editor = Entry(editor, width=30)
+            grade_editor.grid(row=1, column=1)
+            speciality_editor = Entry(editor, width=30)
+            speciality_editor.grid(row=2, column=1)
+            course_editor = Entry(editor, width=30)
+            course_editor.grid(row=3, column=1)
+            cohort_editor = Entry(editor, width=30)
+            cohort_editor.grid(row=4, column=1)
+            discipline_editor = Entry(editor, width=30)
+            discipline_editor.grid(row=5, column=1)
+
+            name_editor.insert(0, records[1])
+            grade_editor.insert(0, records[2])
+            speciality_editor.insert(0, records[3])
+            course_editor.insert(0, records[4])
+            cohort_editor.insert(0, records[5])
+            discipline_editor.insert(0, records[6])
+
+            name_label = Label(editor, text="name")
+            name_label.grid(row=0, column=0, pady=(10, 0))
+            grade_label = Label(editor, text="grade")
+            grade_label.grid(row=1, column=0)
+            speciality_label = Label(editor, text="speciality")
+            speciality_label.grid(row=2, column=0)
+            course_label = Label(editor, text="course")
+            course_label.grid(row=3, column=0)
+            cohort_label = Label(editor, text="cohort")
+            cohort_label.grid(row=4, column=0)
+            discipline_label = Label(editor, text="discipline")
+            discipline_label.grid(row=5, column=0)
+
+            edit_btn = Button(editor, text="Save Record", command=button_pusher)
+            edit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=145)
+
+        except ValueError:
+            mb.showerror(title='Oops, smth go wrong', message='id must be a number')
+            editor.destroy()
+            root.deiconify()
+        except TypeError:
+            mb.showerror(title='Oops, smth go wrong', message='id doesnt exist')
+            editor.destroy()
+            root.deiconify()
+
+    def delete_button():
+        db_id = int(id_box.get())
+        # TODO: delete functionality
 
     def exportToMySQL():
         pass
