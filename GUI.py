@@ -5,6 +5,7 @@ import tkinter.ttk as ttk
 import CRUD
 from postgreSQL import PostgreSQLStudent
 from MySQL import MySQLStudent
+from SQLiteStudent import SQLiteStudent
 
 
 class Table(tk.Frame):
@@ -197,6 +198,7 @@ def run():
                 CRUD.executeCommand(CRUD.create, MySQLStudent, row)
 
             queried = CRUD.executeCommand(CRUD.read, PostgreSQLStudent, data_arr)
+
             global reader
 
             reader = Tk()
@@ -207,7 +209,32 @@ def run():
 
 
     def exportToSQLite():
-        pass
+
+        try:
+            db_name = name.get()
+            db_grade = grade.get()
+            db_speciality = speciality.get()
+            db_course = course.get()
+            db_cohort = cohort.get()
+            db_discipline = discipline.get()
+
+            data_arr = [db_name, db_grade, db_speciality, db_course, db_cohort, db_discipline]
+
+            rows = CRUD.executeCommand(CRUD.read, PostgreSQLStudent, data_arr)
+            columns = ("id", "name", "grade", "speciality", "course", "cohort", "discipline")
+
+            for row in rows:
+                CRUD.executeCommand(CRUD.create, MySQLStudent, row)
+
+            queried = CRUD.executeCommand(CRUD.read, PostgreSQLStudent, data_arr)
+
+            global reader
+
+            reader = Tk()
+            table = Table(reader, headings=('id', 'name', 'grade', 'speciality', 'course', 'cohort', 'discipline'), rows=queried)
+            table.pack(expand=tk.YES, fill=tk.BOTH)
+        except Exception as err:
+            print(f'Something went wrong because of: {err}')
 
     submit_btn = Button(root, text="Додати запис до бази даних", command=create_button)
     submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=90)
