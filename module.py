@@ -13,6 +13,8 @@ class Student(Model):
     cohort = CharField()
     discipline = CharField()
 
+    def getDataBase(self):
+        return self._meta.database
 
     class Meta:
         order_by = 'id'

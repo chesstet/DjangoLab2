@@ -3,8 +3,8 @@ from functools import reduce
 from peewee import *
 import operator
 
-def executeCommand(fn, class_name, dataBase, *data):
-    with dataBase:
+def executeCommand(fn, class_name, *data):
+    with class_name.getDataBase(class_name):
         return fn(class_name, *data)
 
 

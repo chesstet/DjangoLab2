@@ -60,7 +60,22 @@ def run():
     id_box_label.grid(row=9, column=0, pady=5)
 
     def create_button():
-        pass
+        db_name = name.get()
+        db_grade = grade.get()
+        db_speciality = speciality.get()
+        db_course = course.get()
+        db_cohort = cohort.get()
+        db_discipline = discipline.get()
+
+        if db_grade != '':
+            db_grade = int(db_grade)
+        if db_speciality != '':
+            db_speciality = int(db_speciality)
+        if db_course != '':
+            db_course = int(db_course)
+
+        data_arr = [db_name, db_grade, db_speciality, db_course, db_cohort, db_discipline]
+
 
     def read_button():
         pass
