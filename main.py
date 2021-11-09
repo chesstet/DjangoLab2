@@ -1,13 +1,10 @@
-from peewee import *
-import postgreSQL
-from postgreSQL import PostgreSQLStudent
-import CRUD
+import GUI
 
 if __name__ == '__main__':
+    GUI.run()
 
 
 
-
-    testdata = ['', 100, '', '', '', '']
-
-    print(CRUD.executeCommand(CRUD.read, PostgreSQLStudent, testdata))
+    # testdata = ['', 100, '', '', '', '']
+    #
+    # print(CRUD.executeCommand(CRUD.read, PostgreSQLStudent, testdata))

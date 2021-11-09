@@ -48,8 +48,18 @@ def read(class_name, data):
 
         query = class_name.select().where(reduce(operator.and_, clauses))
 
-        result = [(item.name, item.grade, item.speciality, item.grade, item.cohort, item.discipline) for item in query]
+        result = [(item.id, item.name, item.grade, item.speciality, item.course, item.cohort, item.discipline) for item in query]
         print(f'result :{result}')
         return result
+    except Exception as err:
+        print('Something went wrong, because of: {}'.format(err))
+
+def readById(class_name, id):
+    try:
+        query = class_name.select().where(class_name.id == id)
+
+        result = [(item.id, item.name, item.grade, item.speciality, item.course, item.cohort, item.discipline) for item in query]
+        print(f'result :{result}')
+        return result[0]
     except Exception as err:
         print('Something went wrong, because of: {}'.format(err))
