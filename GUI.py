@@ -4,6 +4,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import CRUD
 from postgreSQL import PostgreSQLStudent
+from MySQL import MySQLStudent
 
 
 class Table(tk.Frame):
@@ -78,7 +79,6 @@ def run():
             db_course = int(db_course)
 
         data_arr = [db_name, db_grade, db_speciality, db_course, db_cohort, db_discipline]
-        print(data_arr)
 
         CRUD.executeCommand(CRUD.create, PostgreSQLStudent, data_arr)
 
@@ -187,7 +187,24 @@ def run():
         CRUD.executeCommand(CRUD.delete, PostgreSQLStudent, db_id)
 
     def exportToMySQL():
-        pass
+        try:
+            data_arr = ['' for i in range(6)]
+
+            rows = CRUD.executeCommand(CRUD.read, PostgreSQLStudent, data_arr)
+            columns = ("id", "name", "grade", "speciality", "course", "cohort", "discipline")
+
+            for row in rows:
+                CRUD.executeCommand(CRUD.create, MySQLStudent, row)
+
+            queried = CRUD.executeCommand(CRUD.read, PostgreSQLStudent, data_arr)
+            global reader
+
+            reader = Tk()
+            table = Table(reader, headings=('id', 'name', 'grade', 'speciality', 'course', 'cohort', 'discipline'), rows=queried)
+            table.pack(expand=tk.YES, fill=tk.BOTH)
+        except Exception as err:
+            print(f'Something went wrong because of: {err}')
+
 
     def exportToSQLite():
         pass

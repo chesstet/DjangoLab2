@@ -1,7 +1,7 @@
 from peewee import *
 from module import Student
 
-mysql_db = MySQLDatabase('Lab2DB')
+mysql_db = MySQLDatabase('Lab2DB', user='root', password='admin', host='127.0.0.1')
 
 
 class MySQLStudent(Student):
