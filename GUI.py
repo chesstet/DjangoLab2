@@ -231,9 +231,9 @@ def run():
             columns = ("id", "name", "grade", "speciality", "course", "cohort", "discipline")
 
             for row in rows:
-                CRUD.executeCommand(CRUD.create, MySQLStudent, row)
+                CRUD.executeCommand(CRUD.create, SQLiteStudent, row)
 
-            queried = CRUD.executeCommand(CRUD.read, PostgreSQLStudent, data_arr)
+            queried = CRUD.executeCommand(CRUD.read, SQLiteStudent, data_arr)
 
             global reader
 
