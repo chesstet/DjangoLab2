@@ -8,6 +8,7 @@ from MySQL import MySQLStudent
 from SQLiteStudent import SQLiteStudent
 
 
+# Клас для створення таблиці
 class Table(tk.Frame):
     def __init__(self, parent=None, headings=tuple(), rows=tuple()):
         super().__init__(parent)
@@ -29,7 +30,9 @@ class Table(tk.Frame):
         table.pack(expand=tk.YES, fill=tk.BOTH)
 
 
+# метод для запуску графічного інтерфейсу
 def run():
+    # створення головного вікна та усіх потрібних лейблів/ентрів
     root = Tk()
     root.title('Working with db')
     root.geometry("400x600")
@@ -64,6 +67,7 @@ def run():
     id_box_label = Label(root, text="Вибір ID")
     id_box_label.grid(row=9, column=0, pady=5)
 
+    # виклик create методу
     def create_button():
         db_name = name.get()
         db_grade = grade.get()
@@ -83,7 +87,7 @@ def run():
 
         CRUD.executeCommand(CRUD.create, PostgreSQLStudent, data_arr)
 
-
+    # виклик read методу
     def read_button():
         db_name = name.get()
         db_grade = grade.get()
@@ -110,6 +114,7 @@ def run():
                       rows=queried)
         table.pack(expand=tk.YES, fill=tk.BOTH)
 
+    # виклик update методу
     def update_button():
         def button_pusher():
             db_name = name_editor.get()
@@ -182,11 +187,13 @@ def run():
             editor.destroy()
             root.deiconify()
 
+    # виклик delete методу
     def delete_button():
         db_id = int(id_box.get())
 
         CRUD.executeCommand(CRUD.delete, PostgreSQLStudent, db_id)
 
+    # виклик методу для експорту
     def exportToMySQL():
         try:
             data_arr = ['' for i in range(6)]
@@ -207,7 +214,7 @@ def run():
         except Exception as err:
             print(f'Something went wrong because of: {err}')
 
-
+    # виклик методу для експорту
     def exportToSQLite():
 
         try:
@@ -236,6 +243,7 @@ def run():
         except Exception as err:
             print(f'Something went wrong because of: {err}')
 
+    # створення кнопок
     submit_btn = Button(root, text="Додати запис до бази даних", command=create_button)
     submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=90)
 

@@ -1,13 +1,17 @@
 from functools import reduce
-
 from peewee import *
 import operator
 
+
+# адмінка CRUD
+
+# узагальнений метод для виклику crud
 def executeCommand(fn, class_name, *data):
     with class_name.getDataBase(class_name):
         return fn(class_name, *data)
 
 
+#  create method
 def create(class_name, data):
     try:
         row = class_name.insert(name=data[0], grade=data[1], speciality=data[2], course=data[3],
@@ -15,14 +19,16 @@ def create(class_name, data):
     except Exception as err:
         print('Something went wrong, because of: {}'.format(err))
 
+
+# delete method
 def delete(class_name, id):
     try:
         deleted_row = class_name.delete().where(class_name.id == id).execute()
     except Exception as err:
         print('Something went wrong, because of: {}'.format(err))
 
-#"id", "name", "grade", "speciality", "course", "cohort", "discipline"
 
+# update method
 def update(class_name, data, id):
     try:
         fields = [class_name.name, class_name.grade, class_name.speciality, class_name.course, class_name.cohort, class_name.discipline]
@@ -34,6 +40,8 @@ def update(class_name, data, id):
     except Exception as err:
         print('Something went wrong, because of: {}'.format(err))
 
+
+# read method
 def read(class_name, data):
     try:
         int_fields = [class_name.grade, class_name.speciality, class_name.course]
@@ -54,6 +62,7 @@ def read(class_name, data):
     except Exception as err:
         print('Something went wrong, because of: {}'.format(err))
 
+# read method для считування по id
 def readById(class_name, id):
     try:
         query = class_name.select().where(class_name.id == id)
